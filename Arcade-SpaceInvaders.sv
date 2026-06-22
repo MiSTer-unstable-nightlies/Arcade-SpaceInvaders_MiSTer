@@ -1906,6 +1906,7 @@ samples samples
 	.wave_data({wav_data,wav_data}),
 
 	.samples_ok(use_samples),
+	.mod_cosmo(mod==mod_cosmo),
 
 	.dl_addr(ioctl_addr),
 	.dl_wr(ioctl_wr),
@@ -1976,7 +1977,7 @@ reg [15:0] BB_Tone_Out;
 
 BALLOON_MUSIC BALLOON_MUSIC
 (
-    .I_MUSIC_ON(Tone_High != 7'd127),
+    .I_MUSIC_ON(Tone_High[6:0] != 7'd127),
 	 .I_TONE({1'b1,Tone_High[6:0]}),
     .O_AUDIO(BB_Tone_Out),
     .CLK(clk_10)
