@@ -24,7 +24,9 @@ port(
 	 dl_wr          : in  std_logic;
 	 dl_data        : in  std_logic_vector( 7 downto 0);
 	 dl_download	 : in  std_logic;
+	 
 	 samples_ok     : out std_logic;
+	 mod_cosmo	    : in  std_logic;
 	 
 	 -- Clocks and things
 	 CLK_SYS        : in  std_logic; -- 10Mhz (for loading table)
@@ -149,8 +151,10 @@ begin
 				-- make sure we don't miss any bits being set
 				next_ports <= next_ports or ports;
 
-				-- make sure we don't miss any bits being cleared
-				last_ports <= last_ports and ports;
+				-- make sure we don't miss any bits being cleared (Cosmo only)
+				if (mod_cosmo = '1') then
+					last_ports <= last_ports and ports;
+				end if;
 				
 				if snd_addr_play(snd_id)=x"FFFFFF" then
 					-- All Start play on 0 to 1 transition

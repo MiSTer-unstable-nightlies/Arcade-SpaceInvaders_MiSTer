@@ -264,8 +264,8 @@ begin
 					end if;
 				end loop;			
 			
-				-- Convert to 8 bit value for DAC
-				O_SFX <= std_logic_vector(to_unsigned((Bits * 24),8));
+				-- Convert to 8 bit value for DAC (was 24)
+				O_SFX <= std_logic_vector(to_unsigned((Bits * 31),8));
 			
 			end if;
 
